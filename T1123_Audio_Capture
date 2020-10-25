@@ -1,0 +1,16 @@
+// Name: Credential Dumping PS
+// Description: Checks for execution of MITRE ATT&CK T1123
+// Severity: High
+// QueryFrequency: 1h
+// QueryPeriod: 1h
+// AlertTriggerThreshold: 1
+//
+// DataSource: #Defender ATP (Defender for Endpoint)
+//
+// Tactics: #Collection
+//
+//
+DeviceProcessEvents
+| where ActionType == "ProcessCreated" and FolderPath contains "SoundRecorder.exe"
+or ProcessCommandLine contains "*Get-AudioDevice*"
+or ProcessCommandLine contains "*WindowsAudioDevice-Powershell-Cmdlet*"
